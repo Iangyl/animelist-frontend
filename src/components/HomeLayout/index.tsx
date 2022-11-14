@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './index.module.sass';
+import { Link } from 'react-router-dom';
 import AnimeItem from 'components/AnimeItem';
 
 import data from './mock';
@@ -9,7 +10,9 @@ export default function HomeLayout() {
     <section className={styles.layout}>
       {data &&
         data.map((item) => (
-          <AnimeItem key={item.img} image={item.img} title={item.title} />
+          <Link key={item.img} to={`/anime/${item.title}`}>
+            <AnimeItem image={item.img} title={item.title} />
+          </Link>
         ))}
     </section>
   );

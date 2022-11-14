@@ -10,7 +10,7 @@ const style = {
 export default function PageWrapper({
   children,
 }: {
-  children: React.ReactElement;
+  children: React.ReactElement[] | React.ReactElement;
 }) {
   return (
     <Fragment>
