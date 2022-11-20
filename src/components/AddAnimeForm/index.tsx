@@ -1,24 +1,121 @@
+import React, { useMemo, useState } from 'react';
 import {
+  Box,
+  Container,
   FormControl,
   InputLabel,
   MenuItem,
   Select,
   TextField,
 } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import FileUpload from 'components/FileUpload';
-import React from 'react';
+import {
+  genre,
+  subgenre,
+  animeStatus,
+  animeTypes,
+  ageRating,
+  firstLetterToUpperCase,
+} from 'utils/helpers';
+
 import styles from './index.module.sass';
 
 export default function AddAnimeForm() {
+  const [date, setDate] = useState<Date | string>(new Date());
+
   return (
-    <section>
-      <FileUpload />
-      <TextField id="standard-basic" label="Standard" variant="standard" />
-      <FormControl fullWidth>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+    <Container className={styles.addAnimeForm}>
+      <Box className={styles.row}>
+        <FileUpload />
+      </Box>
+      <Box className={styles.row}>
+        <TextField id="title-field" label="Title" fullWidth />
+      </Box>
+      <FormControl className={styles.row} fullWidth>
+        <InputLabel id="anime-type-select-label">Anime Type</InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
+          labelId="anime-type-select-label"
+          id="anime-type-simple-select"
+          value={1}
+          label="Anime Type"
+          onChange={() => {
+            ('');
+          }}
+        >
+          {animeTypes.map((type: string) => (
+            <MenuItem key={type} value={type}>
+              {firstLetterToUpperCase(type)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl className={styles.row} fullWidth>
+        <InputLabel id="status-select-label">Status</InputLabel>
+        <Select
+          labelId="status-select-label"
+          id="status-simple-select"
+          value={1}
+          label="Status"
+          onChange={() => {
+            ('');
+          }}
+        >
+          {animeStatus.map((status: string) => (
+            <MenuItem key={status} value={status}>
+              {firstLetterToUpperCase(status)}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+      <FormControl className={styles.row}>
+        <DatePicker
+          label="Date of release"
+          inputFormat="DD/MM/YYYY"
+          value={date}
+          onChange={() => {
+            ('');
+          }}
+          renderInput={(params) => <TextField {...params} />}
+        />
+      </FormControl>
+      <FormControl className={styles.row} fullWidth>
+        <InputLabel id="genre-select-label">Genre</InputLabel>
+        <Select
+          labelId="genre-select-label"
+          id="genre-select"
+          value={1}
+          label="Genre"
+          onChange={() => {
+            ('');
+          }}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={styles.row} fullWidth>
+        <InputLabel id="subgenre-select-label">Subgenre</InputLabel>
+        <Select
+          labelId="subgenre-select-label"
+          id="subgenre-select"
+          value={1}
+          label="Subgenre"
+          onChange={() => {
+            ('');
+          }}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
+      <FormControl className={styles.row} fullWidth>
+        <InputLabel id="age-select-label">Age</InputLabel>
+        <Select
+          labelId="age-select-label"
+          id="age-select"
           value={1}
           label="Age"
           onChange={() => {
@@ -30,8 +127,15 @@ export default function AddAnimeForm() {
           <MenuItem value={30}>Thirty</MenuItem>
         </Select>
       </FormControl>
-      <TextField id="standard-basic" label="Standard" variant="standard" />
-      <input type="date" />
-    </section>
+      <Box className={styles.row}>
+        <TextField type="number" label="Duration (min)" fullWidth />
+      </Box>
+      <Box className={styles.row}>
+        <TextField type="number" label="Episodes Amount" fullWidth />
+      </Box>
+      <Box className={styles.row}>
+        <TextField type="text" label="Description" fullWidth />
+      </Box>
+    </Container>
   );
 }

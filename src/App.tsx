@@ -9,6 +9,7 @@ function App() {
       <Fragment>
         <Route path="/" element={<Home />} />
         <Route path="/anime" element={<Anime />} />
+        <Route path="*" element={<Home />} />
       </Fragment>
     </Routes>
   );
