@@ -20,9 +20,26 @@ import {
 } from 'utils/helpers';
 
 import styles from './index.module.sass';
+import MultipleSelect from 'components/MultipleSelect';
 
 export default function AddAnimeForm() {
   const [date, setDate] = useState<Date | string>(new Date());
+
+  const remasteredGenre = useMemo(() => {
+    return genre.map((item: string) => {
+      return {
+        title: item,
+      };
+    });
+  }, []);
+
+  const remasteredSubgenre = useMemo(() => {
+    return subgenre.map((item: string) => {
+      return {
+        title: item,
+      };
+    });
+  }, []);
 
   return (
     <Container className={styles.addAnimeForm}>
@@ -80,36 +97,18 @@ export default function AddAnimeForm() {
         />
       </FormControl>
       <FormControl className={styles.row} fullWidth>
-        <InputLabel id="genre-select-label">Genre</InputLabel>
-        <Select
-          labelId="genre-select-label"
-          id="genre-select"
-          value={1}
+        <MultipleSelect
+          id="genre-multiple-select"
+          data={remasteredGenre}
           label="Genre"
-          onChange={() => {
-            ('');
-          }}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+        />
       </FormControl>
       <FormControl className={styles.row} fullWidth>
-        <InputLabel id="subgenre-select-label">Subgenre</InputLabel>
-        <Select
-          labelId="subgenre-select-label"
-          id="subgenre-select"
-          value={1}
+        <MultipleSelect
+          id="subgenre-multiple-select"
+          data={remasteredSubgenre}
           label="Subgenre"
-          onChange={() => {
-            ('');
-          }}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
+        />
       </FormControl>
       <FormControl className={styles.row} fullWidth>
         <InputLabel id="age-select-label">Age</InputLabel>
@@ -122,9 +121,11 @@ export default function AddAnimeForm() {
             ('');
           }}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
+          {ageRating.map((ageRate: string) => (
+            <MenuItem key={ageRate} value={ageRate}>
+              {firstLetterToUpperCase(ageRate)}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <Box className={styles.row}>
