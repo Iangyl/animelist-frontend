@@ -13,17 +13,14 @@ function Tag(props: TagProps) {
   );
 }
 
-const StyledTag = styled(Tag)<TagProps>(
-  ({ theme }) => `
+const StyledTag = styled(Tag)<TagProps>`
   display: flex;
   align-items: center;
   height: 24px;
   margin: 2px;
   line-height: 22px;
-  background-color: ${
-    theme.palette.mode === 'dark' ? 'rgba(255,255,255,0.08)' : '#fafafa'
-  };
-  border: 1px solid ${theme.palette.mode === 'dark' ? '#303030' : '#e8e8e8'};
+  background-color: #fafafa;
+  border: 1px solid #e8e8e8;
   border-radius: 2px;
   box-sizing: content-box;
   padding: 0 4px 0 10px;
@@ -31,8 +28,8 @@ const StyledTag = styled(Tag)<TagProps>(
   overflow: hidden;
 
   &:focus {
-    border-color: ${theme.palette.mode === 'dark' ? '#177ddc' : '#40a9ff'};
-    background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
+    border-color: #40a9ff;
+    background-color: #e6f7ff;
   }
 
   & span {
@@ -46,7 +43,6 @@ const StyledTag = styled(Tag)<TagProps>(
     cursor: pointer;
     padding: 4px;
   }
-`
-);
+`;
 
 export default StyledTag;

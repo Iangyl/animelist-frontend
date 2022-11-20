@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { autocompleteClasses } from '@mui/material/Autocomplete';
 
-const Listbox = styled('ul')(
-  ({ theme }) => `
+const Listbox = styled('ul')`
   width: 300px;
   margin: 2px 0 0;
   padding: 0;
   position: absolute;
   list-style: none;
-  background-color: ${theme.palette.mode === 'dark' ? '#141414' : '#fff'};
+  background-color: #fff;
   overflow: auto;
   max-height: 250px;
   border-radius: 4px;
@@ -28,8 +27,8 @@ const Listbox = styled('ul')(
     }
   }
 
-  & li[aria-selected='true'] {
-    background-color: ${theme.palette.mode === 'dark' ? '#2b2b2b' : '#fafafa'};
+  & li[aria-selected="true"] {
+    background-color: #fafafa;
     font-weight: 600;
 
     & svg {
@@ -38,14 +37,13 @@ const Listbox = styled('ul')(
   }
 
   & li.${autocompleteClasses.focused} {
-    background-color: ${theme.palette.mode === 'dark' ? '#003b57' : '#e6f7ff'};
+    background-color: #e6f7ff;
     cursor: pointer;
 
     & svg {
       color: currentColor;
     }
   }
-`
-);
+`;
 
 export default Listbox;
