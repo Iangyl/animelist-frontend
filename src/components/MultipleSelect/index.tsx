@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Root from './components/Root';
 import Label from './components/Label';
 import StyledTag from './components/Tag';
@@ -9,7 +9,7 @@ import useAutocomplete from '@mui/material/useAutocomplete';
 import IMultipleSelect, { IMultipleSelectData } from './index.types';
 
 export default function MultipleSelect(props: IMultipleSelect) {
-  const { id, label, data } = props;
+  const { id, label, data, onChange } = props;
   const {
     getRootProps,
     getInputLabelProps,
@@ -23,11 +23,17 @@ export default function MultipleSelect(props: IMultipleSelect) {
     setAnchorEl,
   } = useAutocomplete({
     id,
-    defaultValue: [data[1]],
     multiple: true,
     options: data,
     getOptionLabel: (option) => option.title,
   });
+
+  useEffect(() => {
+    const formattedValues = value.map(
+      (item: IMultipleSelectData) => item.title
+    );
+    onChange(formattedValues);
+  }, [value]);
 
   return (
     <Root>

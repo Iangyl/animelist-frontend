@@ -12,4 +12,5 @@ export default interface IMultipleSelect {
   id: string;
   label?: string;
   data: IMultipleSelectData[];
+  onChange: (args: IMultipleSelectData[] | string[]) => void;
 }
