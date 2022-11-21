@@ -26,6 +26,7 @@ const StyledTag = styled(Tag)<TagProps>`
   padding: 0 4px 0 10px;
   outline: 0;
   overflow: hidden;
+  font-size: 16px;
 
   &:focus {
     border-color: #40a9ff;
@@ -39,9 +40,10 @@ const StyledTag = styled(Tag)<TagProps>`
   }
 
   & svg {
-    font-size: 12px;
+    font-size: 16px;
     cursor: pointer;
     padding: 4px;
+    padding-top: 6.5px;
   }
 `;
 

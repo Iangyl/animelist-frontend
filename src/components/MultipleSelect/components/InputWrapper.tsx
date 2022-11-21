@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 const InputWrapper = styled('div')`
-  width: 300px;
   border: 1px solid #d9d9d9;
   background-color: #fff;
   border-radius: 4px;
   padding: 1px;
   display: flex;
   flex-wrap: wrap;
+  padding: 16.5px 14px;
 
   &:hover {
     border-color: #40a9ff;
