@@ -68,11 +68,14 @@ export default function AddAnimeForm(props: IAddNewAnime) {
       const result = await response.json();
   
       if (!result.success) throw Error(result.message);
+      dispatch({ type: 'init' });
     } catch (e: unknown) {
       console.log(e);
   
       return null;
     } */
+
+    dispatch({ type: 'init' });
   };
 
   const onFileUploadError = (error: string) => {

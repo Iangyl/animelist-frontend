@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { converterBetweenUnitsOfDigitalInformation } from 'utils/helpers';
 import styles from './index.module.sass';
 
 interface IFileUpload {
@@ -12,8 +13,12 @@ export default function FileUpload(props: IFileUpload) {
   const handleChange = (val: React.ChangeEvent<HTMLInputElement>) => {
     if (val.target.files) {
       const file = val.target.files[0];
-      if (file.size > 1024)
-        props.onError('File size cannot exceed more than 1MB');
+      const fileSize = converterBetweenUnitsOfDigitalInformation(
+        { unitType: 'b', value: file.size },
+        'kb'
+      );
+      if (fileSize && fileSize > 4096)
+        props.onError('File size cannot exceed more than 4MB');
       else setFile(file);
     }
   };
