@@ -23,5 +23,5 @@ export default function useFileUpload() {
     }
   };
 
-  return {fileIds, uploadFile};
+  return { fileIds, uploadFile };
 }

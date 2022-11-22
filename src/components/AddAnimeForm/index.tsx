@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import {
   Box,
   Button,
@@ -21,15 +21,22 @@ import {
   firstLetterToUpperCase,
 } from 'utils/helpers';
 import IAddNewAnime from './index.types';
+import { useForm } from 'react-hook-form';
+import { apiPaths } from 'utils/constants';
 import MultipleSelect from 'components/MultipleSelect';
+import { IAddNewAnimeValidation } from 'components/AddAnimeForm/index.types';
 
 import styles from './index.module.sass';
-import { apiPaths } from 'utils/constants';
+import useFileUpload from 'hooks/useFileUpload';
 
 export default function AddAnimeForm(props: IAddNewAnime) {
-  const { state, dispatch, register, handleSubmit, setIsSubmitted, errors } =
-    props;
-  const [fileId, setFileId] = useState<string>();
+  const { state, dispatch, setIsSubmitted } = props;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IAddNewAnimeValidation>();
+  const { fileIds, uploadFile } = useFileUpload();
 
   const remasteredGenre = useMemo(() => {
     return genre.map((item: string) => {
@@ -68,11 +75,21 @@ export default function AddAnimeForm(props: IAddNewAnime) {
     } */
   };
 
+  const onFileUploadError = (error: string) => {
+    console.error(error);
+  };
+
+  useEffect(() => {
+    if (fileIds) {
+      dispatch({ type: 'img', payload: fileIds });
+    }
+  }, [fileIds]);
+
   return (
     <Container className={styles.addAnimeForm}>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Box className={styles.row}>
-          <FileUpload />
+          <FileUpload onError={onFileUploadError} uploadFile={uploadFile} />
         </Box>
         <Box className={styles.row}>
           <TextField

@@ -23,17 +23,9 @@ export interface IAddNewAnimeValidation {
 }
 
 interface IAddNewAnime {
-  register: UseFormRegister<IAddNewAnimeValidation>;
-  handleSubmit: UseFormHandleSubmit<IAddNewAnimeValidation>;
-  watch?: UseFormWatch<IAddNewAnimeValidation>;
-  setIsSubmitted: () => void;
-  errors: Partial<
-    FieldErrorsImpl<{
-      [x: string]: any;
-    }>
-  >;
   state: IAddNewAnimeValidation;
   dispatch: React.Dispatch<IAction>;
+  setIsSubmitted: () => void;
 }
 
 export default IAddNewAnime;
