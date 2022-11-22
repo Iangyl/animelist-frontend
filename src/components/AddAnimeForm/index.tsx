@@ -24,10 +24,12 @@ import IAddNewAnime from './index.types';
 import MultipleSelect from 'components/MultipleSelect';
 
 import styles from './index.module.sass';
+import { apiPaths } from 'utils/constants';
 
 export default function AddAnimeForm(props: IAddNewAnime) {
   const { state, dispatch, register, handleSubmit, setIsSubmitted, errors } =
     props;
+  const [fileId, setFileId] = useState<string>();
 
   const remasteredGenre = useMemo(() => {
     return genre.map((item: string) => {
@@ -45,8 +47,25 @@ export default function AddAnimeForm(props: IAddNewAnime) {
     });
   }, []);
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     setIsSubmitted();
+    console.log('STATE: ', state);
+    /* try {
+      const response = await fetch(apiPaths.addAnime, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(state),
+      });
+      const result = await response.json();
+  
+      if (!result.success) throw Error(result.message);
+    } catch (e: unknown) {
+      console.log(e);
+  
+      return null;
+    } */
   };
 
   return (
