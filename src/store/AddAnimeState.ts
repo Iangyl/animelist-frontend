@@ -1,11 +1,11 @@
-import { IAddNewAnimeValidation } from 'components/AddAnimeForm/index.types';
+import { IAnimeValidation } from 'components/AnimeForm/index.types';
 
 export interface IAction {
   type: string;
   payload?: any;
 }
 
-export const initialState: IAddNewAnimeValidation = {
+export const initialState: IAnimeValidation = {
   title: '',
   img: '',
   type: '',
@@ -54,6 +54,8 @@ export function reducer(state: typeof initialState, action: IAction) {
       return { ...state, description: payload };
     case 'init':
       return init();
+    case 'initWithServerData':
+      return { ...state, ...payload };
     default:
       throw new Error();
   }

@@ -1,13 +1,9 @@
 import React from 'react';
-import {
-  FieldErrorsImpl,
-  UseFormHandleSubmit,
-  UseFormRegister,
-  UseFormWatch,
-} from 'react-hook-form/dist/types';
 import { IAction } from 'store/AddAnimeState';
 
-export interface IAddNewAnimeValidation {
+type ModelActionMode = 'add-anime' | 'update-anime';
+
+export interface IAnimeValidation {
   title: string;
   img?: string;
   type: string;
@@ -22,10 +18,11 @@ export interface IAddNewAnimeValidation {
   description?: string;
 }
 
-interface IAddNewAnime {
-  state: IAddNewAnimeValidation;
+interface IAnime {
+  state: IAnimeValidation;
   dispatch: React.Dispatch<IAction>;
   setIsSubmitted: () => void;
+  mode: ModelActionMode;
 }
 
-export default IAddNewAnime;
+export default IAnime;

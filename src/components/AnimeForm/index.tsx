@@ -20,22 +20,22 @@ import {
   ageRating,
   firstLetterToUpperCase,
 } from 'utils/helpers';
-import IAddNewAnime from './index.types';
+import IAnime from './index.types';
 import { useForm } from 'react-hook-form';
 import { apiPaths } from 'utils/constants';
 import MultipleSelect from 'components/MultipleSelect';
-import { IAddNewAnimeValidation } from 'components/AddAnimeForm/index.types';
+import { IAnimeValidation } from 'components/AnimeForm/index.types';
 
 import styles from './index.module.sass';
 import useFileUpload from 'hooks/useFileUpload';
 
-export default function AddAnimeForm(props: IAddNewAnime) {
+export default function AnimeForm(props: IAnime) {
   const { state, dispatch, setIsSubmitted } = props;
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IAddNewAnimeValidation>();
+  } = useForm<IAnimeValidation>();
   const { fileIds, uploadFile } = useFileUpload();
 
   const remasteredGenre = useMemo(() => {
@@ -54,10 +54,29 @@ export default function AddAnimeForm(props: IAddNewAnime) {
     });
   }, []);
 
-  const handleFormSubmit = async () => {
-    setIsSubmitted();
-    console.log('STATE: ', state);
-    /* try {
+  const updateAnime = async () => {
+    const TEMP_ID = 1;
+    try {
+      const response = await fetch(`${apiPaths.updateAnime}/${TEMP_ID}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(state),
+      });
+      const result = await response.json();
+
+      if (!result.success) throw Error(result.message);
+      dispatch({ type: 'init' });
+    } catch (e: unknown) {
+      console.error(e);
+
+      return null;
+    }
+  };
+
+  const postAnime = async () => {
+    try {
       const response = await fetch(apiPaths.addAnime, {
         method: 'POST',
         headers: {
@@ -66,14 +85,22 @@ export default function AddAnimeForm(props: IAddNewAnime) {
         body: JSON.stringify(state),
       });
       const result = await response.json();
-  
+
       if (!result.success) throw Error(result.message);
       dispatch({ type: 'init' });
     } catch (e: unknown) {
-      console.log(e);
-  
+      console.error(e);
+
       return null;
-    } */
+    }
+  };
+
+  const handleFormSubmit = () => {
+    setIsSubmitted();
+    console.log('STATE: ', state);
+
+    if (props.mode === 'add-anime') postAnime();
+    else updateAnime();
 
     dispatch({ type: 'init' });
   };

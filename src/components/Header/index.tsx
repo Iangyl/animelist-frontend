@@ -2,7 +2,7 @@ import React, { useReducer, useState } from 'react';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import ModalWindow from 'components/ModalWindow';
-import AddAnimeForm from 'components/AddAnimeForm';
+import AnimeForm from 'components/AnimeForm';
 import { reducer, initialState, init } from 'store/AddAnimeState';
 
 import styles from './index.module.sass';
@@ -23,10 +23,11 @@ export default function Header() {
         </Button>
       </div>
       <ModalWindow open={isOpen} onClose={onClose}>
-        <AddAnimeForm
+        <AnimeForm
           state={state}
           dispatch={dispatch}
           setIsSubmitted={() => onClose()}
+          mode="add-anime"
         />
       </ModalWindow>
     </header>

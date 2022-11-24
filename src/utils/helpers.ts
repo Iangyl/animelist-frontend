@@ -7,6 +7,10 @@ import {
 } from 'components/interfaces';
 import { UnitForConvert, UnitOfDigitalInformation } from './index.types';
 
+export const convertStringArrayIntoRow = (array: string[]) => {
+  return array && array.join(', ');
+};
+
 export const converterBetweenUnitsOfDigitalInformation = (
   from: UnitForConvert,
   to: UnitOfDigitalInformation
