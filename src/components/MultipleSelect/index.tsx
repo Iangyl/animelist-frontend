@@ -30,9 +30,7 @@ export default function MultipleSelect(props: IMultipleSelect) {
   });
 
   useEffect(() => {
-    const formattedValues = value.map(
-      (item: string) => item
-    );
+    const formattedValues = value.map((item: string) => item);
     onChange(formattedValues);
   }, [value]);
 
