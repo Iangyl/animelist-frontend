@@ -11,6 +11,7 @@ import {
   Typography,
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
+import TextareaAutosize from '@mui/base/TextareaAutosize';
 import FileUpload from 'components/FileUpload';
 import {
   genre,
@@ -28,6 +29,7 @@ import { IAnimeValidation } from 'components/AnimeForm/index.types';
 
 import styles from './index.module.sass';
 import useFileUpload from 'hooks/useFileUpload';
+import TextSpace from 'components/TextSpace';
 
 export default function AnimeForm(props: IAnime) {
   const { state, dispatch, setIsSubmitted } = props;
@@ -70,8 +72,6 @@ export default function AnimeForm(props: IAnime) {
       dispatch({ type: 'init' });
     } catch (e: unknown) {
       console.error(e);
-
-      return null;
     }
   };
 
@@ -90,8 +90,6 @@ export default function AnimeForm(props: IAnime) {
       dispatch({ type: 'init' });
     } catch (e: unknown) {
       console.error(e);
-
-      return null;
     }
   };
 
@@ -101,8 +99,6 @@ export default function AnimeForm(props: IAnime) {
 
     if (props.mode === 'add-anime') postAnime();
     else updateAnime();
-
-    dispatch({ type: 'init' });
   };
 
   const onFileUploadError = (error: string) => {
@@ -256,21 +252,28 @@ export default function AnimeForm(props: IAnime) {
           />
         </Box>
         <Box className={styles.row}>
-          <TextField
-            type="text"
-            label="Description"
-            value={state.description}
+          <InputLabel
+            id="description-label"
+            sx={{ color: 'rgba(0,0,0,0.85)', fontSize: '14px' }}
+          >
+            Description
+          </InputLabel>
+          <TextSpace
+            placeholder="Maximum 20 rows"
+            value={state.description ?? ''}
             {...register('description')}
             onChange={(v) =>
               dispatch({ type: 'description', payload: v.target.value })
             }
-            fullWidth
           />
         </Box>
         <Box
           className={styles.row}
-          sx={{ display: 'flex', justifyContent: 'flex-end' }}
+          sx={{ display: 'flex', gap: '25px', justifyContent: 'flex-end' }}
         >
+          <Button variant="outlined" type="button" onClick={setIsSubmitted}>
+            Close
+          </Button>
           <Button variant="contained" type="submit">
             Ok
           </Button>

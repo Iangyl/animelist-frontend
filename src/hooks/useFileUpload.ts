@@ -18,7 +18,7 @@ export default function useFileUpload() {
       });
       const result = await response.json();
 
-      setFileIds(result);
+      setFileIds(result.data);
     } catch (e: unknown) {
       console.error(e);
     }

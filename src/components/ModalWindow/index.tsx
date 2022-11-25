@@ -14,6 +14,7 @@ export default function ModalWindow({ children, open, onClose }: IModal) {
       onClose={onClose}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
+      sx={{ overflow: 'auto' }}
     >
       {children}
     </Modal>
