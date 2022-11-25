@@ -19,6 +19,26 @@ export default function Anime() {
 
   const onClose = () => setIsOpen(false);
 
+  const handleUpdate = async () => {
+    try {
+      const response = await fetch(`${apiPaths.updateAnime}/${state._id}`, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(state),
+      });
+      const result = await response.json();
+
+      if (!result.success) throw Error(result.message);
+      dispatch({ type: 'init' });
+
+      onClose();
+    } catch (e: unknown) {
+      console.error(e);
+    }
+  };
+
   const handleDelete = async () => {
     const result = await fetch(`${apiPaths.deleteAnime}/${id}`, {
       method: 'DELETE',
@@ -42,6 +62,7 @@ export default function Anime() {
         if (!result.success) throw Error('Internal error!');
 
         setAnime(result.data);
+        dispatch({ type: 'initWithServerData', payload: result.data });
       } catch (e: unknown) {
         console.error(e);
       }
@@ -102,7 +123,7 @@ export default function Anime() {
         <AnimeForm
           state={state}
           dispatch={dispatch}
-          setIsSubmitted={() => onClose()}
+          setIsSubmitted={handleUpdate}
           mode="update-anime"
         />
       </ModalWindow>

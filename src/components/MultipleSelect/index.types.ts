@@ -4,13 +4,10 @@ export interface TagProps extends ReturnType<AutocompleteGetTagProps> {
   label: string;
 }
 
-export interface IMultipleSelectData {
-  title: string;
-}
-
 export default interface IMultipleSelect {
   id: string;
   label?: string;
-  data: IMultipleSelectData[];
-  onChange: (args: IMultipleSelectData[] | string[]) => void;
+  value: string[];
+  data: string[];
+  onChange: (args: string[]) => void;
 }

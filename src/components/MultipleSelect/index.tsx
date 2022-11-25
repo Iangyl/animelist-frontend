@@ -6,7 +6,7 @@ import Listbox from './components/ListBox';
 import CheckIcon from '@mui/icons-material/Check';
 import InputWrapper from './components/InputWrapper';
 import useAutocomplete from '@mui/material/useAutocomplete';
-import IMultipleSelect, { IMultipleSelectData } from './index.types';
+import IMultipleSelect from './index.types';
 
 export default function MultipleSelect(props: IMultipleSelect) {
   const { id, label, data, onChange } = props;
@@ -23,14 +23,15 @@ export default function MultipleSelect(props: IMultipleSelect) {
     setAnchorEl,
   } = useAutocomplete({
     id,
+    value: props.value,
     multiple: true,
     options: data,
-    getOptionLabel: (option) => option.title,
+    getOptionLabel: (option) => option,
   });
 
   useEffect(() => {
     const formattedValues = value.map(
-      (item: IMultipleSelectData) => item.title
+      (item: string) => item
     );
     onChange(formattedValues);
   }, [value]);
@@ -40,9 +41,9 @@ export default function MultipleSelect(props: IMultipleSelect) {
       <div {...getRootProps()}>
         <Label {...getInputLabelProps()}>{label ?? 'Multiple Select'}</Label>
         <InputWrapper ref={setAnchorEl} className={focused ? 'focused' : ''}>
-          {value.map((option: IMultipleSelectData, index: number) => (
+          {value.map((option: string, index: number) => (
             // eslint-disable-next-line react/jsx-key
-            <StyledTag label={option.title} {...getTagProps({ index })} />
+            <StyledTag label={option} {...getTagProps({ index })} />
           ))}
           <input {...getInputProps()} />
         </InputWrapper>
@@ -52,7 +53,7 @@ export default function MultipleSelect(props: IMultipleSelect) {
           {(groupedOptions as typeof data).map((option, index) => (
             // eslint-disable-next-line react/jsx-key
             <li {...getOptionProps({ option, index })}>
-              <span>{option.title}</span>
+              <span>{option}</span>
               <CheckIcon fontSize="small" />
             </li>
           ))}

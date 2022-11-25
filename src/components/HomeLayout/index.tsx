@@ -9,7 +9,6 @@ import { IAnimeValidation } from 'components/AnimeForm/index.types';
 export default function HomeLayout() {
   const [animes, setAnimes] = useState<IAnimeValidation[]>();
 
-  console.log(animes);
   useEffect(() => {
     const getData = async () => {
       try {

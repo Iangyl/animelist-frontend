@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import {
   Box,
   Button,
@@ -11,7 +11,6 @@ import {
   Typography,
 } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import TextareaAutosize from '@mui/base/TextareaAutosize';
 import FileUpload from 'components/FileUpload';
 import {
   genre,
@@ -39,22 +38,6 @@ export default function AnimeForm(props: IAnime) {
     formState: { errors },
   } = useForm<IAnimeValidation>();
   const { fileIds, uploadFile } = useFileUpload();
-
-  const remasteredGenre = useMemo(() => {
-    return genre.map((item: string) => {
-      return {
-        title: item,
-      };
-    });
-  }, []);
-
-  const remasteredSubgenre = useMemo(() => {
-    return subgenre.map((item: string) => {
-      return {
-        title: item,
-      };
-    });
-  }, []);
 
   const updateAnime = async () => {
     const TEMP_ID = 1;
@@ -95,7 +78,6 @@ export default function AnimeForm(props: IAnime) {
 
   const handleFormSubmit = () => {
     setIsSubmitted();
-    console.log('STATE: ', state);
 
     if (props.mode === 'add-anime') postAnime();
     else updateAnime();
@@ -193,14 +175,16 @@ export default function AnimeForm(props: IAnime) {
           <MultipleSelect
             id="genre-multiple-select"
             label="Genre"
-            data={remasteredGenre}
+            value={state.genre}
+            data={genre}
             onChange={(v) => dispatch({ type: 'genre', payload: v })}
           />
         </FormControl>
         <FormControl className={styles.row} fullWidth>
           <MultipleSelect
             id="subgenre-multiple-select"
-            data={remasteredSubgenre}
+            value={state.subgenre ?? []}
+            data={subgenre}
             label="Subgenre"
             onChange={(v) => dispatch({ type: 'subgenre', payload: v })}
           />
