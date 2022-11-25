@@ -12,7 +12,7 @@ export const initialState: IAnimeValidation = {
   status: '',
   date: new Date(),
   genre: [],
-  subgenre: '',
+  subgenre: [],
   age_rating: '',
   duration: '',
   episodesAmount: 0,

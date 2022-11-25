@@ -4,4 +4,5 @@ export const apiPaths = {
   deleteAnime: process.env.REACT_APP_API_DEV + '/v1/anime/edit',
   updateAnime: process.env.REACT_APP_API_DEV + '/v1/anime/delete',
   getAnimes: process.env.REACT_APP_API_DEV + '/v1/anime',
+  getImage: process.env.REACT_APP_API_DEV + '/static',
 };

@@ -4,6 +4,9 @@ import IAnime from 'components/interfaces';
 
 import styles from './index.module.sass';
 import { convertStringArrayIntoRow } from 'utils/helpers';
+import { IAnimeValidation } from 'components/AnimeForm/index.types';
+import EmptyAnimeCover from 'components/icons/EmptyAnimeCover';
+import { apiPaths } from 'utils/constants';
 
 const Label = ({ text }: { text: string }) => {
   return <span className={styles.label}>{text}</span>;
@@ -13,7 +16,7 @@ const InfoChunk = ({ value }: { value: string | number }) => {
   return <span className={styles.value}>{value.toString()}</span>;
 };
 
-export default function Information(anime: IAnime) {
+export default function Information(anime: Omit<IAnimeValidation, 'title'>) {
   const {
     img,
     type,
@@ -30,15 +33,15 @@ export default function Information(anime: IAnime) {
   return (
     <Container sx={{ display: 'flex', gap: '40px' }}>
       <Box>
-        <img
-          src={
-            !(img && img?.length === 0)
-              ? 'https://wallpaperaccess.com/full/2099328.jpg'
-              : img
-          }
-          style={{ maxWidth: '300px', width: '100%' }}
-          alt="anime cover"
-        />
+        {img ? (
+          <img
+            src={`${apiPaths.getImage}/${img}`}
+            style={{ maxWidth: '300px', width: '100%' }}
+            alt="anime cover"
+          />
+        ) : (
+          <EmptyAnimeCover />
+        )}
       </Box>
       <Box className={styles.infoRow}>
         <Typography variant="h4" sx={{ marginBottom: '18px' }}>

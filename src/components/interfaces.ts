@@ -53,6 +53,7 @@ export enum AnimeStatus {
   ONGOING = 'Ongoing',
   PAUSED = 'Paused',
   STOPPED = 'Stopped',
+  UNKNOWN = 'Unknown',
 }
 
 export enum AnimeTypes {
@@ -63,7 +64,7 @@ export enum AnimeTypes {
   SPECIAL = 'Special',
 }
 
-export type AgeRating = 'G' | 'PG' | 'PG-13' | 'R' | 'XR';
+export type AgeRating = 'G' | 'PG' | 'PG-13' | 'R' | 'XR' | 'No rating';
 
 export default interface IAnime {
   title: string;

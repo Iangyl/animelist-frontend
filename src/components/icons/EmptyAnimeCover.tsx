@@ -2,8 +2,7 @@ import React from 'react';
 import ErrorOutlined from './ErrorOutlined';
 
 const style: React.CSSProperties = {
-  maxWidth: '300px',
-  width: '100%',
+  width: '300px',
   height: '400px',
   backgroundColor: 'gray',
   display: 'flex',

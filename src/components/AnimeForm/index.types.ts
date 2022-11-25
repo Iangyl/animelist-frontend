@@ -9,8 +9,8 @@ export interface IAnimeValidation {
   type: string;
   status: string;
   date?: Date | string;
-  genre: string | string[];
-  subgenre?: string | string[];
+  genre: string[];
+  subgenre?: string[];
   age_rating: string;
   duration?: string;
   episodesAmount: number;
