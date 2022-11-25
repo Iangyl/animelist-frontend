@@ -36,7 +36,7 @@ export default function Information(anime: Omit<IAnimeValidation, 'title'>) {
         {img ? (
           <img
             src={`${apiPaths.getImage}/${img}`}
-            style={{ maxWidth: '300px', width: '100%' }}
+            style={{ width: '300px', height: '400px' }}
             alt="anime cover"
           />
         ) : (

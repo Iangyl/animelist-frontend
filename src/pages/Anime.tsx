@@ -16,7 +16,9 @@ export default function Anime() {
   const [anime, setAnime] = useState<IAnimeValidation>();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [state, dispatch] = useReducer(reducer, initialState, init);
+
   const onClose = () => setIsOpen(false);
+
   const handleDelete = async () => {
     const result = await fetch(`${apiPaths.deleteAnime}/${id}`, {
       method: 'DELETE',
@@ -24,8 +26,9 @@ export default function Anime() {
     });
 
     const res = await result.json();
-    if (res.status !== 'success') console.error('error during deleting');
+    if (!res.success) console.error('error during deleting');
   };
+
   useEffect(() => {
     const getAnime = async () => {
       try {
@@ -46,6 +49,7 @@ export default function Anime() {
 
     getAnime();
   }, []);
+
   return (
     <PageWrapper>
       <Typography
